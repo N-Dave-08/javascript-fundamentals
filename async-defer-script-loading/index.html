@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script>
-      // START HTML PARSING TIMER
-      const htmlParseStart = performance.now();
+      // GLOBAL START TIMER
+      window.pageStart = performance.now();
 
       console.log("===== START HTML PARSE =====");
-      console.log(`HTML parsing started at ${htmlParseStart.toFixed(2)} ms`);
+
+      console.log(
+        `HTML parsing started at ${(performance.now() - pageStart).toFixed(2)} ms`,
+      );
     </script>
 
     <title>Normal vs Async vs Defer</title>
@@ -35,7 +38,7 @@
             JS executes immediately
                 ↓
             HTML parsing pauses temporarily -->
-    <script async src="async.js"></script>
+    <!-- <script async src="async.js"></script> -->
 
     <!-- DEFER -->
     <!-- HTML parsing continues
@@ -45,7 +48,7 @@
             HTML fully finishes
                 ↓
             THEN script executes -->
-    <!-- <script defer src="defer.js"></script> -->
+    <script defer src="defer.js"></script>
   </head>
 
   <body>
@@ -61,15 +64,14 @@
     </script>
 
     <script>
-      // END HTML PARSING TIMER
-      const htmlParseEnd = performance.now();
-
       console.log("===== END HTML PARSE =====");
 
-      console.log(`HTML parsing finished at ${htmlParseEnd.toFixed(2)} ms`);
+      console.log(
+        `HTML parsing finished at ${(performance.now() - pageStart).toFixed(2)} ms`,
+      );
 
       console.log(
-        `Total HTML parsing time: ${(htmlParseEnd - htmlParseStart).toFixed(2)} ms`,
+        `Total HTML parsing time: ${(performance.now() - pageStart).toFixed(2)} ms`,
       );
     </script>
   </body>
