@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script>
+      // START HTML PARSING TIMER
+      const htmlParseStart = performance.now();
+
+      console.log("===== START HTML PARSE =====");
+      console.log(`HTML parsing started at ${htmlParseStart.toFixed(2)} ms`);
+    </script>
+
+    <title>Normal vs Async vs Defer</title>
+
+    <!-- NORMAL -->
+    <!-- Browser parses HTML
+                ↓
+            Finds script
+                ↓
+            BLOCKS HTML parsing
+                ↓
+            Downloads + executes JS
+                ↓
+            Continues HTML -->
+    <!-- <script src="normal.js"></script> -->
+
+    <!-- ASYNC -->
+    <!-- HTML parsing continues
+                +
+            JS downloads in parallel
+                ↓
+            Once download finishes:
+            JS executes immediately
+                ↓
+            HTML parsing pauses temporarily -->
+    <script async src="async.js"></script>
+
+    <!-- DEFER -->
+    <!-- HTML parsing continues
+                +
+            JS downloads in parallel
+                ↓
+            HTML fully finishes
+                ↓
+            THEN script executes -->
+    <!-- <script defer src="defer.js"></script> -->
+  </head>
+
+  <body>
+    <h1>Check Console</h1>
+
+    <div id="content">CONTENT ELEMENT</div>
+
+    <script>
+      // Simulate heavy HTML parsing
+      for (let i = 0; i < 10000; i++) {
+        document.write(`<p>Row ${i}</p>`);
+      }
+    </script>
+
+    <script>
+      // END HTML PARSING TIMER
+      const htmlParseEnd = performance.now();
+
+      console.log("===== END HTML PARSE =====");
+
+      console.log(`HTML parsing finished at ${htmlParseEnd.toFixed(2)} ms`);
+
+      console.log(
+        `Total HTML parsing time: ${(htmlParseEnd - htmlParseStart).toFixed(2)} ms`,
+      );
+    </script>
+  </body>
+</html>
