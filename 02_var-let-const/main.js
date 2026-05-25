@@ -57,3 +57,25 @@ const user = { name: "Doe" };
 user.name = "Alice";
 
 console.log(user);
+
+{
+  for (var i = 1; i <= 3; i++) {
+    setTimeout(() => {
+      console.log(i);
+    }, 0);
+  }
+
+  // 4, 4, 4
+  // because var is function-scoped, all callbacks share the same i
+  // and by the time they run, the loop has already finished (i = 4)
+
+  for (let i = 1; i <= 3; i++) {
+    setTimeout(() => {
+      console.log(i);
+    }, 0);
+  }
+
+  // 1, 2, 3
+  // because let is block-scoped, each iteration creates a new i binding
+  // so each callback closes over its own separate i value
+}
