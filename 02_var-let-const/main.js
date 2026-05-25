@@ -24,10 +24,6 @@ var varVariableSecond = "before declaring";
 console.log(varVariableSecond);
 
 if (true) {
-  let letVariable = "This is true";
-}
-
-if (true) {
   const constVariable = "This is true const";
   let letVariable = "This is true let";
   letVariable = "This is false let";
