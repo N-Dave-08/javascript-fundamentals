@@ -1,4 +1,4 @@
-// A function that is passed as an argument to another function, so it can be executed later.
+// callback is a function that is passed as an argument to another function, so it can be executed later.
 
 // functions in javascript are just objects
 // objects that you can call with parenthesis and pass in arguments in
