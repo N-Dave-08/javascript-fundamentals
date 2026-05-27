@@ -1,109 +1,186 @@
 // =========================
-// ADDING ELEMENTS
+// DOM MANIPULATION
+// =========================
+
+// =========================
+// SELECTING ELEMENTS
 // =========================
 
 const body = document.body;
 
-// append() can add text nodes and elements
-body.append("Hello World", " Bye");
-
-// create a new div element
-const div = document.createElement("div");
-
-// innerText respects styling and visibility
-div.innerText = "hello";
-
-// textContent includes all text exactly as written
-div.textContent = "Hello World 2";
-
-// append() adds elements at the end
-body.append(div);
-
-// appendChild() also adds elements
-// works only with nodes/elements
-body.appendChild(div);
-
-// prepend() adds elements at the beginning
-const prependDiv = document.createElement("div");
-prependDiv.textContent = "Prepended Element";
-body.prepend(prependDiv);
-
-// insertBefore()
-const anotherDiv = document.createElement("div");
-anotherDiv.textContent = "Inserted Before";
-body.insertBefore(anotherDiv, div);
-
-// =========================
-// READING TEXT CONTENT
-// =========================
+console.log(body);
 
 const container = document.querySelector("#container");
 
-console.log(container.textContent);
-// prints the exact content of the container
-// includes hidden elements
-// prints:
-// Some Text
-// Another Text
+console.log(container);
 
-console.log(container.innerText);
-// prints only visible text
-// ignores display: none
-// prints:
-// Some Text
+const firstSpan = document.querySelector("span");
 
-// =========================
-// MODIFYING ELEMENT HTML
-// =========================
+console.log(firstSpan);
 
-// innerHTML allows HTML tags
-const htmlDiv = document.createElement("div");
+const allSpans = document.querySelectorAll("span");
 
-htmlDiv.innerHTML = `
-  <strong>Bold Text</strong>
-  <span>Normal Text</span>
-`;
+console.log(allSpans);
 
-body.append(htmlDiv);
-
-// replace content completely
-htmlDiv.innerHTML = "<h1>Replaced HTML Content</h1>";
+// NodeList loop
+allSpans.forEach((span) => {
+  console.log(span.textContent);
+});
 
 // =========================
-// MODIFYING ELEMENT TEXT
+// CREATING ELEMENTS
+// =========================
+
+const div = document.createElement("div");
+
+console.log(div);
+
+div.textContent = "Hello World";
+
+body.append(div);
+
+// create paragraph
+const paragraph = document.createElement("p");
+
+paragraph.textContent = "This is a paragraph";
+
+body.append(paragraph);
+
+// create button
+const button = document.createElement("button");
+
+button.textContent = "Click Me";
+
+body.append(button);
+
+// create image
+const image = document.createElement("img");
+
+image.src = "image.png";
+image.alt = "Example Image";
+image.width = 200;
+
+body.append(image);
+
+// create unordered list
+const ul = document.createElement("ul");
+
+body.append(ul);
+
+// create list items
+for (let i = 1; i <= 3; i++) {
+  const li = document.createElement("li");
+
+  li.textContent = `Item ${i}`;
+
+  ul.append(li);
+}
+
+// =========================
+// ADDING ELEMENTS
+// =========================
+
+// append()
+const appendDiv = document.createElement("div");
+
+appendDiv.textContent = "append() example";
+
+body.append(appendDiv);
+
+// append multiple values
+body.append("Hello", "World");
+
+// prepend()
+const prependDiv = document.createElement("div");
+
+prependDiv.textContent = "prepend() example";
+
+body.prepend(prependDiv);
+
+// appendChild()
+const appendChildDiv = document.createElement("div");
+
+appendChildDiv.textContent = "appendChild() example";
+
+body.appendChild(appendChildDiv);
+
+// before()
+const beforeDiv = document.createElement("div");
+
+beforeDiv.textContent = "Inserted Before Container";
+
+container.before(beforeDiv);
+
+// after()
+const afterDiv = document.createElement("div");
+
+afterDiv.textContent = "Inserted After Container";
+
+container.after(afterDiv);
+
+// insertBefore()
+const insertBeforeDiv = document.createElement("div");
+
+insertBeforeDiv.textContent = "insertBefore() example";
+
+body.insertBefore(insertBeforeDiv, appendDiv);
+
+// =========================
+// MODIFYING TEXT
 // =========================
 
 const textDiv = document.createElement("div");
 
-textDiv.textContent = "Original Text";
 body.append(textDiv);
 
-// change text
-textDiv.textContent = "Updated Text Content";
+// textContent
+textDiv.textContent = "Using textContent";
+
+console.log(textDiv.textContent);
+
+// innerText
+textDiv.innerText = "Using innerText";
+
+console.log(textDiv.innerText);
+
+// difference example
+console.log(container.textContent);
+// includes hidden text
+
+console.log(container.innerText);
+// only visible text
 
 // =========================
-// REMOVING ELEMENTS
+// MODIFYING HTML
 // =========================
 
-const removeDiv = document.createElement("div");
+const htmlDiv = document.createElement("div");
 
-removeDiv.textContent = "This element will be removed";
-body.append(removeDiv);
+body.append(htmlDiv);
 
-// removes the element from the DOM
-removeDiv.remove();
+// innerHTML
+htmlDiv.innerHTML = `
+  <h1>Title</h1>
+  <p>Paragraph</p>
+`;
 
-// remove child example
-const parent = document.createElement("div");
-const child = document.createElement("span");
+console.log(htmlDiv.innerHTML);
 
-child.textContent = "Child Element";
+// replace existing HTML
+htmlDiv.innerHTML = `
+  <ul>
+    <li>HTML Item 1</li>
+    <li>HTML Item 2</li>
+  </ul>
+`;
 
-parent.append(child);
-body.append(parent);
-
-// removeChild removes a specific child
-parent.removeChild(child);
+// insertAdjacentHTML()
+htmlDiv.insertAdjacentHTML(
+  "beforeend",
+  `
+    <strong>Inserted using insertAdjacentHTML</strong>
+  `,
+);
 
 // =========================
 // MODIFYING ATTRIBUTES
@@ -111,18 +188,20 @@ parent.removeChild(child);
 
 const link = document.createElement("a");
 
-link.textContent = "Visit Google";
-
-// setAttribute(name, value)
-link.setAttribute("href", "https://google.com");
-
-// set target attribute
-link.setAttribute("target", "_blank");
+link.textContent = "Go To Google";
 
 body.append(link);
 
+// setAttribute()
+link.setAttribute("href", "https://google.com");
+
+link.setAttribute("target", "_blank");
+
 // getAttribute()
 console.log(link.getAttribute("href"));
+
+// hasAttribute()
+console.log(link.hasAttribute("target"));
 
 // removeAttribute()
 link.removeAttribute("target");
@@ -130,25 +209,43 @@ link.removeAttribute("target");
 // direct property access
 link.href = "https://youtube.com";
 
+// input attributes
+const input = document.createElement("input");
+
+body.append(input);
+
+input.type = "password";
+input.placeholder = "Enter Password";
+input.required = true;
+
+console.log(input.required);
+
 // =========================
 // MODIFYING DATA ATTRIBUTES
 // =========================
 
 const dataDiv = document.createElement("div");
 
-dataDiv.textContent = "Data Attribute Example";
-
-// data-user-id="1234"
-dataDiv.dataset.userId = "1234";
-
-// data-role="admin"
-dataDiv.dataset.role = "admin";
-
 body.append(dataDiv);
 
-// accessing dataset values
+// set dataset values
+dataDiv.dataset.userId = "123";
+dataDiv.dataset.role = "admin";
+dataDiv.dataset.isActive = "true";
+
 console.log(dataDiv.dataset.userId);
 console.log(dataDiv.dataset.role);
+console.log(dataDiv.dataset.isActive);
+
+// generated HTML:
+// <div data-user-id="123"></div>
+
+dataDiv.dataset.userName = "Dave";
+
+console.log(dataDiv.dataset.userName);
+
+// remove dataset
+delete dataDiv.dataset.role;
 
 // =========================
 // MODIFYING CLASSES
@@ -160,9 +257,11 @@ classDiv.textContent = "Class Example";
 
 body.append(classDiv);
 
-// add classes
+// add class
 classDiv.classList.add("active");
-classDiv.classList.add("dark");
+
+// add multiple classes
+classDiv.classList.add("dark", "rounded");
 
 // remove class
 classDiv.classList.remove("dark");
@@ -170,11 +269,16 @@ classDiv.classList.remove("dark");
 // toggle class
 classDiv.classList.toggle("hidden");
 
-// check if class exists
+// contains()
 console.log(classDiv.classList.contains("active"));
 
-// replace class
+// replace()
 classDiv.classList.replace("active", "enabled");
+
+// className
+classDiv.className = "box large red";
+
+console.log(classDiv.className);
 
 // =========================
 // MODIFYING STYLES
@@ -182,119 +286,283 @@ classDiv.classList.replace("active", "enabled");
 
 const styleDiv = document.createElement("div");
 
-styleDiv.textContent = "Styled Element";
+styleDiv.textContent = "Styled Div";
 
 body.append(styleDiv);
 
-// modifying inline styles
-styleDiv.style.color = "white";
+// inline styles
 styleDiv.style.backgroundColor = "tomato";
+styleDiv.style.color = "white";
 styleDiv.style.padding = "1rem";
-styleDiv.style.borderRadius = "8px";
+styleDiv.style.margin = "1rem";
+styleDiv.style.borderRadius = "10px";
 styleDiv.style.fontSize = "2rem";
 
 // hide element
 styleDiv.style.display = "none";
 
-// show element again
+// show again
 styleDiv.style.display = "block";
 
+// width and height
+styleDiv.style.width = "200px";
+styleDiv.style.height = "100px";
+
+// border
+styleDiv.style.border = "5px solid black";
+
 // =========================
-// EVENT LISTENER EXAMPLE
+// REMOVING ELEMENTS
 // =========================
 
-const button = document.createElement("button");
+const removeDiv = document.createElement("div");
 
-button.textContent = "Click Me";
+removeDiv.textContent = "Remove Me";
 
-body.append(button);
+body.append(removeDiv);
 
-button.addEventListener("click", () => {
-  console.log("Button Clicked");
+// remove()
+removeDiv.remove();
 
-  // dynamically modify styles
-  button.style.backgroundColor = "black";
-  button.style.color = "white";
-});
+// removeChild()
+const parent = document.createElement("div");
+const child = document.createElement("span");
+
+child.textContent = "Child Element";
+
+parent.append(child);
+
+body.append(parent);
+
+parent.removeChild(child);
 
 // =========================
 // REPLACING ELEMENTS
 // =========================
 
-const replaceOld = document.createElement("div");
-replaceOld.textContent = "Old Element";
+const oldElement = document.createElement("div");
 
-const replaceNew = document.createElement("div");
-replaceNew.textContent = "New Element";
+oldElement.textContent = "Old Element";
 
-body.append(replaceOld);
+body.append(oldElement);
+
+const newElement = document.createElement("div");
+
+newElement.textContent = "New Element";
 
 // replaceWith()
-replaceOld.replaceWith(replaceNew);
+oldElement.replaceWith(newElement);
+
+// replaceChild()
+const parentReplace = document.createElement("div");
+
+const child1 = document.createElement("p");
+const child2 = document.createElement("p");
+
+child1.textContent = "First Child";
+child2.textContent = "Second Child";
+
+parentReplace.append(child1);
+
+body.append(parentReplace);
+
+parentReplace.replaceChild(child2, child1);
 
 // =========================
 // CLONING ELEMENTS
 // =========================
 
-const cloneDiv = document.createElement("div");
+const original = document.createElement("div");
 
-cloneDiv.textContent = "Original Element";
+original.textContent = "Original Element";
 
-body.append(cloneDiv);
+body.append(original);
 
-// true = deep clone
-const clonedElement = cloneDiv.cloneNode(true);
+// cloneNode()
+const clone = original.cloneNode(true);
 
-body.append(clonedElement);
+body.append(clone);
 
 // =========================
-// WORKING WITH INPUT VALUES
+// EVENT LISTENERS
 // =========================
 
-const input = document.createElement("input");
+const clickButton = document.createElement("button");
 
-input.type = "text";
-input.placeholder = "Enter your name";
+clickButton.textContent = "Click Button";
 
-body.append(input);
+body.append(clickButton);
 
-input.addEventListener("input", () => {
-  console.log(input.value);
+clickButton.addEventListener("click", () => {
+  console.log("Button Clicked");
+});
+
+// mouseover
+clickButton.addEventListener("mouseover", () => {
+  clickButton.style.backgroundColor = "black";
+  clickButton.style.color = "white";
+});
+
+// mouseleave
+clickButton.addEventListener("mouseleave", () => {
+  clickButton.style.backgroundColor = "";
+  clickButton.style.color = "";
 });
 
 // =========================
-// PRACTICAL TODO EXAMPLE
+// INPUT EVENTS
 // =========================
 
+const textInput = document.createElement("input");
+
+textInput.placeholder = "Type something";
+
+body.append(textInput);
+
+textInput.addEventListener("input", () => {
+  console.log(textInput.value);
+});
+
+// focus
+textInput.addEventListener("focus", () => {
+  console.log("Input Focused");
+});
+
+// blur
+textInput.addEventListener("blur", () => {
+  console.log("Input Blurred");
+});
+
+// =========================
+// TODO LIST EXAMPLE
+// =========================
+
+const todoTitle = document.createElement("h2");
+
+todoTitle.textContent = "Todo List";
+
+body.append(todoTitle);
+
 const todoInput = document.createElement("input");
+
+todoInput.placeholder = "Enter Todo";
+
+body.append(todoInput);
+
 const todoButton = document.createElement("button");
+
+todoButton.textContent = "Add Todo";
+
+body.append(todoButton);
+
 const todoList = document.createElement("ul");
 
-todoInput.placeholder = "Add Todo";
-todoButton.textContent = "Add";
-
-body.append(todoInput, todoButton, todoList);
+body.append(todoList);
 
 todoButton.addEventListener("click", () => {
+  // prevent empty values
+  if (todoInput.value === "") return;
+
   // create list item
   const li = document.createElement("li");
 
   li.textContent = todoInput.value;
 
-  // skip empty input
-  if (todoInput.value === "") return;
+  // create delete button
+  const deleteButton = document.createElement("button");
 
-  // add class
-  li.classList.add("todo-item");
+  deleteButton.textContent = "Delete";
 
-  // remove item when clicked
-  li.addEventListener("click", () => {
-    li.remove();
-  });
+  li.append(deleteButton);
 
   // append to list
   todoList.append(li);
 
+  // remove todo
+  deleteButton.addEventListener("click", () => {
+    li.remove();
+  });
+
+  // toggle completed
+  li.addEventListener("click", () => {
+    li.classList.toggle("completed");
+
+    if (li.classList.contains("completed")) {
+      li.style.textDecoration = "line-through";
+    } else {
+      li.style.textDecoration = "none";
+    }
+  });
+
   // clear input
   todoInput.value = "";
+});
+
+// =========================
+// TIMER EXAMPLE
+// =========================
+
+const timerDiv = document.createElement("div");
+
+body.append(timerDiv);
+
+let count = 0;
+
+setInterval(() => {
+  count++;
+
+  timerDiv.textContent = `Timer: ${count}`;
+}, 1000);
+
+// =========================
+// DARK MODE TOGGLE
+// =========================
+
+const darkModeButton = document.createElement("button");
+
+darkModeButton.textContent = "Toggle Dark Mode";
+
+body.append(darkModeButton);
+
+darkModeButton.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  if (document.body.classList.contains("dark-mode")) {
+    body.style.backgroundColor = "black";
+    body.style.color = "white";
+  } else {
+    body.style.backgroundColor = "white";
+    body.style.color = "black";
+  }
+});
+
+// =========================
+// DYNAMIC CARD EXAMPLE
+// =========================
+
+const card = document.createElement("div");
+
+card.style.border = "1px solid black";
+card.style.padding = "1rem";
+card.style.marginTop = "1rem";
+
+const cardTitle = document.createElement("h3");
+
+cardTitle.textContent = "Dynamic Card";
+
+const cardDescription = document.createElement("p");
+
+cardDescription.textContent =
+  "This card was created completely using JavaScript.";
+
+const cardButton = document.createElement("button");
+
+cardButton.textContent = "Remove Card";
+
+card.append(cardTitle, cardDescription, cardButton);
+
+body.append(card);
+
+cardButton.addEventListener("click", () => {
+  card.remove();
 });
