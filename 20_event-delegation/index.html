@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="main.js" defer></script>
+    <style>
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 4rem);
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .box {
+        height: 4rem;
+        width: 4rem;
+        border: 5px solid black;
+        border-color: black;
+      }
+
+      .clicked {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" data-add-box>Create Box</button>
+    <div class="grid">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+    <div class="box"></div>
+  </body>
+</html>
