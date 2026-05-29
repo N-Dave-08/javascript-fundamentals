@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="main.js" defer></script>
+    <style>
+      .show {
+        height: 10rem;
+        width: 10rem;
+        background-color: rgb(17, 180, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="test-div"
+      data-first-name="Jacob"
+      data-last-name="Morales"
+      data-active
+    ></div>
+
+    <div>
+      <button data-modal-id="#modal-1">Open Modal 1</button>
+      <button data-modal-id="#modal-2">Open Modal 2</button>
+      <div id="modal-1" data-modal-content>Modal 1</div>
+      <div id="modal-2" data-modal-content>Modal 2</div>
+    </div>
+  </body>
+</html>
