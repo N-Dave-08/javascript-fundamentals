@@ -69,3 +69,35 @@ console.log(factorial(5));
 // factorial(3) → returns 3 * 2 = 6
 // factorial(4) → returns 4 * 6 = 24
 // factorial(5) → returns 5 * 24 = 120
+
+function sumRange(n) {
+  if (n === 1) return 1;
+  // BASE CASE RETURN:
+  // stops recursion
+  // returns 1 to previous function call
+
+  return n + sumRange(n - 1);
+  // WAIT PHASE:
+  // JS first calls sumRange(n - 1)
+  // current function PAUSES until result comes back
+  // RETURN PHASE:
+  // adds current n to returned value
+  // then passes result upward
+}
+
+console.log(sumRange(5));
+
+// RETURN FLOW:
+// sumRange(5)
+// = 5 + sumRange(4)
+// = 5 + 4 + sumRange(3)
+// = 5 + 4 + 3 + sumRange(2)
+// = 5 + 4 + 3 + 2 + sumRange(1)
+// = 15
+
+// UNWINDING (RETURNING BACK UP):
+// sumRange(1) → returns 1
+// sumRange(2) → returns 2 + 1 = 3
+// sumRange(3) → returns 3 + 3 = 6
+// sumRange(4) → returns 4 + 6 = 10
+// sumRange(5) → returns 5 + 10 = 15
