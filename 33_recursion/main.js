@@ -101,3 +101,50 @@ console.log(sumRange(5));
 // sumRange(3) → returns 3 + 3 = 6
 // sumRange(4) → returns 4 + 6 = 10
 // sumRange(5) → returns 5 + 10 = 15
+
+function printChildrenRecursive(t) {
+  if (t.children.length === 0) {
+    return;
+    // BASE CASE RETURN:
+    // if there are no children, stop recursion for this branch
+    // this prevents going deeper into an empty node
+  }
+
+  t.children.forEach((child) => {
+    console.log(child.name);
+    // prints the current child name before going deeper
+
+    printChildrenRecursive(child);
+    // RECURSIVE CALL:
+    // we go one level deeper into the tree
+    // each child becomes a new "current tree"
+    // function repeats until it reaches a leaf node (no children)
+  });
+
+  // IMPORTANT IDEA:
+  // this function does NOT return a value upward
+  // it only performs actions (console.log + traversal)
+}
+
+const tree = {
+  name: "John",
+  children: [
+    {
+      name: "Jim",
+      children: [],
+    },
+    {
+      name: "Zoe",
+      children: [
+        {
+          name: "Kyle",
+          children: [],
+        },
+        {
+          name: "Sohpia",
+          children: [],
+        },
+      ],
+    },
+  ],
+};
