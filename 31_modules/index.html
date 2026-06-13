@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Modules</title>
+
+    <!--
+      type="module" tells the browser that this file is an ES Module.
+
+      Benefits:
+      - Allows the use of import/export syntax.
+      - Runs in its own module scope.
+      - Automatically uses strict mode.
+      - Automatically behaves like defer.
+        (HTML parsing continues while the module downloads.)
+
+      Because modules are deferred by default,
+      adding the "defer" attribute here is unnecessary.
+    -->
+    <script type="module" src="main.js"></script>
+  </head>
+
+  <body></body>
+</html>
